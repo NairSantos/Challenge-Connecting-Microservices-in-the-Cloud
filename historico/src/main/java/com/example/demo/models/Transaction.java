@@ -67,8 +67,5 @@ public class Transaction {
     public void setClient(Client client) {
         this.client = client;
     }
-//ver onde daaaaaaaaaa erro no transactionService
-    public void setClient(com.example.demo.models.Client client) {
-        this.client = (Client) client;
-    }
+
 }
