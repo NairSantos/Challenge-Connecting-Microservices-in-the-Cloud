@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.Javer.dto.ClientCreateDto;
 import com.example.Javer.dto.ClientResponseDto;
 
-@FeignClient(name = "service", url = "http://localhost:8080")
+
+@FeignClient(name = "service", url = "http://localhost:8081")
 public interface TransactionServiceProxy {
 
     @GetMapping

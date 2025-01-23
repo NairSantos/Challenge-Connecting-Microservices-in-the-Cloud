@@ -29,6 +29,8 @@ public class ClientController {
     @GetMapping
     public ResponseEntity<List<ClientResponseDto>> getAllClients() {
         List<Client> clients = clientService.buscarTodosClientes();
+        //add para tirar o erro
+        @SuppressWarnings("Convert2Diamond")
         List<ClientResponseDto> dtos = new ArrayList<ClientResponseDto>();
         for (Client client : clients) {
             dtos.add(ClientMapper.toDto(client));

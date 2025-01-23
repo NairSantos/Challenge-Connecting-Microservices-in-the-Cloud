@@ -2,6 +2,8 @@ package com.example.Javer.dto;
 
 public class ClientResponseDto {
 
+  
+
     private int id;
     private String nome;
     private Long telefone;
@@ -15,27 +17,28 @@ public class ClientResponseDto {
         this.id = id;
     }
 
-    public String getName() {
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public Long getTelephone() {
+    public Long getTelefone() {
         return telefone;
     }
 
-    public void setTelephone(Long telephone) {
-        this.telefone = telephone;
+    public void setTelefone(Long telefone) {
+        this.telefone = telefone;
     }
 
-    public Float getSaldo() {
+    public Float getSaldoCc() {
         return saldoCc;
     }
 
-    public void setSaldo(Float saldo) {
-        this.saldoCc = saldo;
+    public void setSaldoCc(Float saldoCc) {
+        this.saldoCc = saldoCc;
     }
+
 }

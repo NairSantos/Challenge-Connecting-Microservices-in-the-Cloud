@@ -18,7 +18,4 @@ public class ClientMapper {
         return new ModelMapper().map(client, ClientResponseDto.class);
     }
 
-    public static String toDeleteMessage(ClientResponseDto clientId) {
-        return "ClientId:" + clientId + " deleted successfully.";
-    }
 }

@@ -2,7 +2,7 @@ package com.example.Javer.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,13 @@ import com.example.Javer.proxy.TransactionServiceProxy;
 @RequestMapping("/servico/clientes")
 public class JaverController {
 
-    @Autowired
+    //@Autowired
     private TransactionServiceProxy proxy;
+
+    @GetMapping("/test")
+    public String test() {
+        return "API funcionando!";
+    }
 
     @GetMapping
     public ResponseEntity<List<ClientResponseDto>> getAll() {
