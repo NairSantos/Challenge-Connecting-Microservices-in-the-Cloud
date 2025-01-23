@@ -1,5 +1,6 @@
 package com.example.demo.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
+import com.example.demo.dto.ClientCreateDto;
+import com.example.demo.dto.ClientResponseDto;
+import com.example.demo.dto.mapper.ClientMapper;
 import com.example.demo.models.Client;
-import com.example.demo.repositories.ClientRepository;
 import com.example.demo.services.ClientService;
 
 @RestController
@@ -24,39 +26,27 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @Autowired
-    private ClientRepository clientRepository;
-
     @GetMapping
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
+    public ResponseEntity<List<ClientResponseDto>> getAllClients() {
+        List<Client> clients = clientService.buscarTodosClientes();
+        List<ClientResponseDto> dtos = new ArrayList<ClientResponseDto>();
+        for (Client client : clients) {
+            dtos.add(ClientMapper.toDto(client));
+        }
+        return ResponseEntity.ok(dtos);
+
     }
     
     @PostMapping
-    public Client createClient(@RequestBody Client client) {
-        return clientRepository.save(client);
+    public ResponseEntity<ClientResponseDto> createClient(@RequestBody ClientCreateDto dto) {
+        Client client = clientService.salvar(ClientMapper.toClient(dto));
+        return ResponseEntity.ok(ClientMapper.toDto(client));
     }
 
     @PutMapping("/{id}")
-    public Client updateBalance(@PathVariable Long id, @RequestParam Float newBalance) {
-        return clientService.updateBalance(id, newBalance);
+    public ResponseEntity<ClientResponseDto> updateBalance(@PathVariable Long id, @RequestParam Float newBalance) {
+        Client client = clientService.updateBalance(id, newBalance);
+        return ResponseEntity.ok(ClientMapper.toDto(client));
     }
 
-    @Autowired
-    private RestTemplate restTemplate;
-
-    @GetMapping("/calcular-score/{id}")
-    public ResponseEntity<Float> calcularScore(@PathVariable Long id) {
-        // Busca os dados do cliente na Segunda Aplicação
-        String url = "http://localhost:8081/client/" + id;
-        Client client = restTemplate.getForObject(url, Client.class);
-
-        if (client == null || client.getSaldoCc() == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        // Cálculo do score de crédito
-        Float scoreCredito = client.getSaldoCc() * 0.1f;
-        return ResponseEntity.ok(scoreCredito);
-    }
 }
