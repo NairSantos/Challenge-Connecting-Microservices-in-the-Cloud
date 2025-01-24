@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Client {
@@ -14,6 +15,8 @@ public class Client {
     private Long telefone;      
     private Boolean correntista;
     private Float saldoCc;
+    @Transient
+    private Float scoreCredito;
 
 
     // Getters e Setters
@@ -56,6 +59,14 @@ public class Client {
 
     public void setSaldoCc(Float saldoCc) {
         this.saldoCc = saldoCc;
+    }
+
+    public Float getScoreCredito() {
+        return this.saldoCc*0.1f;
+    }
+
+    public void setScoreCredito(Float scoreCredito) {
+        this.scoreCredito = scoreCredito;
     }
 
 }

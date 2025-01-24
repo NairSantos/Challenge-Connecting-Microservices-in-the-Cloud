@@ -31,4 +31,5 @@ public interface TransactionServiceProxy {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id);
 
+
 }

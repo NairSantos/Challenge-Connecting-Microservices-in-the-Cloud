@@ -1,5 +1,7 @@
 package com.example.Javer.models;
 
+import jakarta.persistence.Transient;
+
 
 public class Client {
     
@@ -8,6 +10,8 @@ public class Client {
     private Long telefone;      
     private Boolean correntista;
     private Float saldoCc;
+    @Transient
+    private Float scoreCredito;//esta amarelo pq não está sendo usado diretamente pois é um atributo calculado
 
 
     // Getters e Setters
@@ -50,6 +54,14 @@ public class Client {
 
     public void setSaldoCc(Float saldoCc) {
         this.saldoCc = saldoCc;
+    }
+
+    public Float getScoreCredito() {
+        return this.saldoCc*0.1f;
+    }
+
+    public void setScoreCredito(Float scoreCredito) {
+        this.scoreCredito = scoreCredito;
     }
 
 }

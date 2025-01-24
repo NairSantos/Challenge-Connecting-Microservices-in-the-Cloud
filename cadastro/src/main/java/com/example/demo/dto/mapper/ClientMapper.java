@@ -1,9 +1,10 @@
 package com.example.demo.dto.mapper;
 
+import org.modelmapper.ModelMapper;
+
 import com.example.demo.dto.ClientCreateDto;
 import com.example.demo.dto.ClientResponseDto;
 import com.example.demo.models.Client;
-import org.modelmapper.ModelMapper;
 
 public class ClientMapper {
 
@@ -16,5 +17,5 @@ public class ClientMapper {
     public static ClientResponseDto toDto(Client client){
         return new ModelMapper().map(client, ClientResponseDto.class);
     }
-
+    
 }

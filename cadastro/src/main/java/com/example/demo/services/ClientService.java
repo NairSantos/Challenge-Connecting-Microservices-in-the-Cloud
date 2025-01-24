@@ -1,13 +1,13 @@
 package com.example.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.models.Client;
 import com.example.demo.repositories.ClientRepository;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 public class ClientService {
@@ -36,6 +36,16 @@ public class ClientService {
 
         // Salva o cliente atualizado
         return clientRepository.save(client);
+    }
+
+    @Transactional
+    public void removerCliente(Long id) {
+        // Verifica se o cliente existe
+        Client client = clientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+        // Remove o cliente
+        clientRepository.delete(client);
     }
 
 }
