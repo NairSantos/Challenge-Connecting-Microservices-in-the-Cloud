@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import jakarta.persistence.Transient;
 
+// Classe DTO (Data Transfer Object) para representar os dados de resposta ao cliente.
 public class ClientResponseDto {
 
     private int id;
@@ -10,8 +11,10 @@ public class ClientResponseDto {
     private boolean correntista;
     private Float saldoCc;
 
+    // Campo que não será persistido no banco de dados, mas será usado na lógica de negócios ou apresentado como resposta.
      @Transient
     private Float scoreCredito;
+
 
     public int getId() {
         return id;
@@ -54,7 +57,7 @@ public class ClientResponseDto {
     }
 
     public Float getScoreCredito() {
-        return this.saldoCc*0.1f;
+        return this.saldoCc*0.1f;// Calcula o score como 10% do saldo da conta corrente.
     }
 
     public void setScoreCredito(Float scoreCredito) {

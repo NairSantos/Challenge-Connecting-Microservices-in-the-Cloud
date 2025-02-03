@@ -21,15 +21,22 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+/*
+ * aqui é onde serao gerenciados as requisições HTTP e onde é direcionadas as chamadas para os serviços apropriados.    
+ */
 
+
+// Indica que esta classe é um controlador REST
 @RestController
+// Define o endpoint base para a rotas ("/servico/clientes").
 @RequestMapping("/servico/clientes")
 @Tag(name = "Clientes", description = "Gerenciamento de Clientes")
 public class JaverController {
 
-    //@Autowired
+    // Proxy para comunicação com outro serviço
     private TransactionServiceProxy proxy;
 
+    // Endpoint para listar todos os clientes
     @Operation(summary = "Listar todos os clientes", description = "Recupera a lista completa de clientes registrados.", method = "GET")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lista de clientes retornada com sucesso"),
@@ -40,6 +47,7 @@ public class JaverController {
         return proxy.getAllClients();
     }
 
+    // Endpoint para criar um novo cliente
     @Operation(summary = "Criar um novo cliente", description = "Cria um novo cliente no sistema com as informações fornecidas.",method = "POST")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"),
@@ -53,6 +61,7 @@ public class JaverController {
         return proxy.createClient(dto);
     }
 
+    // Endpoint para atualizar o saldo de um cliente
     @Operation(summary = "Atualizar saldo do cliente", description = "Atualiza o saldo de conta corrente de um cliente existente.",method = "PUT")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Saldo atualizado com sucesso"),
@@ -66,6 +75,7 @@ public class JaverController {
         return proxy.updateBalance(id, newBalance);
     }
 
+    // Endpoint para deletar um cliente
         @Operation(summary = "Deletar cliente", description = "Remove um cliente do sistema com base no ID fornecido.",method = "DELETE")
         @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Cliente deletado com sucesso"),

@@ -1,16 +1,17 @@
 package com.example.demo.dto;
-
-import jakarta.persistence.Transient;
-
 public class ClientCreateDto {
 
+    public ClientCreateDto(String nome, Long telefone, boolean correntista, Float saldoCc) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.correntista = correntista;
+        this.saldoCc = saldoCc;
+    }
+    
     private String nome;
     private Long telefone;
     private boolean correntista;
     private Float saldoCc;
-
-     @Transient
-    private Float scoreCredito;
 
     public String getNome() {
         return nome;
@@ -44,11 +45,5 @@ public class ClientCreateDto {
         this.saldoCc = saldoCc;
     }
 
-    public Float getScoreCredito() {
-        return this.saldoCc*0.1f;
-    }
 
-    public void setScoreCredito(Float scoreCredito) {
-        this.scoreCredito = scoreCredito;
-    }
 }

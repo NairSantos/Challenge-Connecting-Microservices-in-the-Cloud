@@ -2,13 +2,23 @@ package com.example.Javer.dto;
 
 import jakarta.persistence.Transient;
 
+// Classe DTO (Data Transfer Object) para representar os dados de entrada necessários para criar um cliente.
 public class ClientCreateDto {
+
+    public ClientCreateDto(String nome, Long telefone, boolean correntista, Float saldoCc) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.correntista = correntista;
+        this.saldoCc = saldoCc;
+    }
 
     private String nome;
     private Long telefone;
     private boolean correntista;
     private Float saldoCc;
-    @Transient
+
+    // Campo que não será persistido no banco de dados, mas calculado a partir do saldo da conta corrente.
+     @Transient
     private Float scoreCredito;
 
     public String getNome() {
@@ -44,7 +54,7 @@ public class ClientCreateDto {
     }
 
     public Float getScoreCredito() {
-        return this.saldoCc*0.1f;
+        return this.saldoCc*0.1f; // Calcula o score como 10% do saldo da conta corrente.
     }
 
     public void setScoreCredito(Float scoreCredito) {

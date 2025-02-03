@@ -15,21 +15,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.Javer.dto.ClientCreateDto;
 import com.example.Javer.dto.ClientResponseDto;
 
+/*
+ * Facilita a comunicação com o outro microsserviço
+ */
 
+
+// Define um cliente Feign para se comunicar com o serviço na URL especificada
 @FeignClient(name = "service", url = "http://localhost:8081")
 public interface TransactionServiceProxy {
 
     @GetMapping
-    public ResponseEntity<List<ClientResponseDto>> getAllClients();
+    public ResponseEntity<List<ClientResponseDto>> getAllClients();// Recupera todos os clientes
 
     @PostMapping
-    public ResponseEntity<ClientResponseDto> createClient(@RequestBody ClientCreateDto dto);
+    public ResponseEntity<ClientResponseDto> createClient(@RequestBody ClientCreateDto dto); // Cria um novo cliente
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClientResponseDto> updateBalance(@PathVariable Long id, @RequestParam Float newBalance);
+    public ResponseEntity<ClientResponseDto> updateBalance(@PathVariable Long id, @RequestParam Float newBalance); // Atualiza o saldo de um cliente
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteClient(@PathVariable Long id);
-
-
+    public ResponseEntity<Void> deleteClient(@PathVariable Long id); // Remove um cliente
 }

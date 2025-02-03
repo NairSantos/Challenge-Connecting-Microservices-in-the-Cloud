@@ -6,15 +6,24 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 
+/*
+ * definem as entidades do domínio
+ */
+
+// Define esta classe como uma entidade JPA, ou seja, será mapeada para uma tabela no banco de dados.
 @Entity
 public class Client {
+    // Indica que este campo é a chave primária da entidade.
     @Id
+    // Define que o valor do ID será gerado automaticamente.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private Long telefone;      
     private Boolean correntista;
     private Float saldoCc;
+
+    // Campo que não será persistido no banco de dados.
     @Transient
     private Float scoreCredito;
 
@@ -62,7 +71,7 @@ public class Client {
     }
 
     public Float getScoreCredito() {
-        return this.saldoCc*0.1f;
+        return this.saldoCc*0.1f;// Calcula o score como 10% do saldo da conta corrente.
     }
 
     public void setScoreCredito(Float scoreCredito) {
